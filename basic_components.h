@@ -41,7 +41,8 @@ const double cdb_overhead = 1.1;
 enum FU_type {
     FPU,
     ALU,
-    MUL
+    MUL,
+    AVX512
 };
 
 enum Renaming_type {
@@ -163,7 +164,7 @@ public:
     int  fetchW, decodeW,issueW,peak_issueW, commitW,peak_commitW, predictionW, fp_issueW, fp_decodeW;
     int  perThreadState, globalCheckpoint, instruction_length, pc_width, opcode_length, micro_opcode_length;
     int  num_hthreads, pipeline_stages, fp_pipeline_stages, num_pipelines, num_fp_pipelines;
-    int  num_alus, num_muls;
+    int  num_alus, num_muls, num_avx512;
     double num_fpus;
     int  int_data_width, fp_data_width,v_address_width, p_address_width;
     double pipeline_duty_cycle, total_cycles, busy_cycles, idle_cycles;
