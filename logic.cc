@@ -666,6 +666,21 @@ void FunctionalUnit::displayEnergy(uint32_t indent,int plevel,bool is_tdp)
 			cout << indent_str_next << "Runtime Dynamic = " << rt_power.readOp.dynamic/executionTime << " W" << endl;
 			cout <<endl;
 		}
+		else if (fu_type == AVX512)
+		{
+			cout << indent_str << "AVX512 Units (Count: "<< coredynp.num_avx512 <<" ):" << endl;
+            fu_type = FPU;
+			cout << indent_str_next << "Area = " << area.get_area()*1e-6  << " mm^2" << endl;
+			cout << indent_str_next << "Peak Dynamic = " << (512/32)*power.readOp.dynamic*clockRate  << " W" << endl;
+//			cout << indent_str_next << "Subthreshold Leakage = " << power.readOp.leakage  << " W" << endl;
+			cout << indent_str_next<< "Subthreshold Leakage = "
+						<< (512/32)*(long_channel? power.readOp.longer_channel_leakage:power.readOp.leakage) <<" W" << endl;
+			if (power_gating) cout << indent_str_next << "Subthreshold Leakage with power gating = "
+					<< (512/32)*(long_channel? power.readOp.power_gated_with_long_channel_leakage : power.readOp.power_gated_leakage)  << " W" << endl;
+			cout << indent_str_next << "Gate Leakage = " << (512/32)*power.readOp.gate_leakage  << " W" << endl;
+			cout << indent_str_next << "Runtime Dynamic = " << (512/32)*rt_power.readOp.dynamic/executionTime << " W" << endl;
+			cout <<endl;
+		}
 		else if (fu_type == ALU)
 		{
 			cout << indent_str << "Integer ALUs (Count: "<< coredynp.num_alus <<" ):" << endl;

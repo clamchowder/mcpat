@@ -1,0 +1,32 @@
+Core:
+      Subthreshold Leakage = 2.18681 W
+      Gate Leakage = 0.00412182 W
+      Runtime Dynamic = 9.1518 W
+      Instruction Fetch Unit:
+        Subthreshold Leakage = 0.406371 W
+        Gate Leakage = 0.000946084 W
+        Runtime Dynamic = 1.47242 W
+      Renaming Unit:
+        Subthreshold Leakage = 0.0310777 W
+        Gate Leakage = 0.000128233 W
+        Runtime Dynamic = 0.236266 W
+      Load Store Unit:
+        Subthreshold Leakage = 0.248651 W
+        Gate Leakage = 0.000481544 W
+        Runtime Dynamic = 2.28068 W
+      Memory Management Unit:
+        Subthreshold Leakage = 0.0178735 W
+        Runtime Dynamic = 0.118273 W
+      Execution Unit:
+        Subthreshold Leakage = 0.34411 W
+        Runtime Dynamic = 5.00998 W
+    L2
+    Subthreshold Leakage = 0.512001 W
+    Gate Leakage = 0.000273817 W
+    Runtime Dynamic = 0.034178 W
+
+
+      L3 (of two cores)
+      Subthreshold Leakage = 1.56961 W
+      Gate Leakage = 0.0004715 W
+      Runtime Dynamic = 0.0293058 W

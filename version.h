@@ -33,8 +33,8 @@
 #define VERSION_H_
 
 #define VER_MAJOR		1
-#define VER_MINOR		3
+#define VER_MINOR		2
 
-#define VER_UPDATE	        "Feb, 2015"
+#define VER_UPDATE	        "June, 2014"
 
 #endif /* VERSION_H_ */

@@ -188,7 +188,6 @@ typedef struct{
 	int phy_Regs_IRF_size;
 	int phy_Regs_FRF_size;
 	int rename_scheme;
-	int checkpoint_depth;
 	int register_windows_size;
 	char LSU_order[20];
 	int store_buffer_size;
@@ -205,6 +204,7 @@ typedef struct{
 	double total_instructions;
 	double int_instructions;
 	double fp_instructions;
+	double avx512_instructions;
 	double branch_instructions;
 	double branch_mispredictions;
 	double committed_instructions;

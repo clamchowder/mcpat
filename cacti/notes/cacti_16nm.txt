@@ -1,5 +1,4 @@
-/*****************************************************************************
- *                                McPAT/CACTI
+ 
  *                      SOFTWARE LICENSE AGREEMENT
  *            Copyright 2012 Hewlett-Packard Development Company, L.P.
  *                          All Rights Reserved
@@ -2063,7 +2062,6 @@ void init_tech_params(double technology, bool is_tag)
         curr_alpha = (tech_lo - technology)/(tech_lo - tech_hi);
       }
     }
-
 
     if (tech == 180)
     {

@@ -226,7 +226,6 @@ void ParseXML::parse(char* filepath)
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"phy_Regs_IRF_size")==0) {sys.core[i].phy_Regs_IRF_size=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"phy_Regs_FRF_size")==0) {sys.core[i].phy_Regs_FRF_size=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"rename_scheme")==0) {sys.core[i].rename_scheme=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
-							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"checkpoint_depth")==0) {sys.core[i].checkpoint_depth=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"register_windows_size")==0) {sys.core[i].register_windows_size=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"LSU_order")==0) {strcpy(sys.core[i].LSU_order,xNode3.getChildNode("param",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"store_buffer_size")==0) {sys.core[i].store_buffer_size=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
@@ -242,6 +241,7 @@ void ParseXML::parse(char* filepath)
 							if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"total_instructions")==0) {sys.core[i].total_instructions=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"int_instructions")==0) {sys.core[i].int_instructions=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"fp_instructions")==0) {sys.core[i].fp_instructions=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
+							if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"AVX512_instructions")==0) {sys.core[i].avx512_instructions=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;} //AH
 							if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"branch_instructions")==0) {sys.core[i].branch_instructions=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"branch_mispredictions")==0) {sys.core[i].branch_mispredictions=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("stat",k).getAttribute("name"),"committed_instructions")==0) {sys.core[i].committed_instructions=atof(xNode3.getChildNode("stat",k).getAttribute("value"));continue;}
@@ -1492,7 +1492,6 @@ void ParseXML::initialize() //Initialize all
 		sys.core[i].phy_Regs_IRF_size=1;
 		sys.core[i].phy_Regs_FRF_size=1;
 		//strcpy(sys.core[i].rename_scheme,"default");
-		sys.core[i].checkpoint_depth=1;
 		sys.core[i].register_windows_size=1;
 		strcpy(sys.core[i].LSU_order,"default");
 		sys.core[i].store_buffer_size=1;
@@ -1504,6 +1503,7 @@ void ParseXML::initialize() //Initialize all
 		sys.core[i].total_instructions=1;
 		sys.core[i].int_instructions=1;
 		sys.core[i].fp_instructions=1;
+		sys.core[i].avx512_instructions=1; //AH
 		sys.core[i].branch_instructions=1;
 		sys.core[i].branch_mispredictions=1;
 		sys.core[i].committed_instructions=1;
