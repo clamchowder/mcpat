@@ -54,10 +54,10 @@ ArrayST::ArrayST(const InputParameter *configure_interface,
  core_ty(core_ty_),
  is_default(_is_default)
     {
-
 	if (l_ip.cache_sz<64) l_ip.cache_sz=64;
 	if (l_ip.power_gating && (l_ip.assoc==0)) {l_ip.power_gating = false;}
 	l_ip.error_checking();//not only do the error checking but also fill some missing parameters
+	cout << "Optimizing array " << _name << "" << endl;
 	optimize_array();
 
 }
