@@ -177,6 +177,7 @@ typedef struct{
 	int ALU_per_core;
 	double FPU_per_core;
 	int MUL_per_core;
+	int AVX512_per_core;
 	int instruction_buffer_size;
 	int decoded_stream_buffer_size;
 	int instruction_window_scheme;

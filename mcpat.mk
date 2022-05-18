@@ -4,7 +4,7 @@ SHELL = /bin/sh
 .SUFFIXES: .cc .o
 
 ifndef NTHREADS
-  NTHREADS = 1
+  NTHREADS = 4
 endif
 
 
@@ -16,7 +16,7 @@ ifeq ($(TAG),dbg)
   OPT = -ggdb -g -O0 -DNTHREADS=1 -Icacti
 else
   DBG = 
-  OPT = -O3 -DNTHREADS=$(NTHREADS) -Icacti
+  OPT = -O3 -mcpu=neoverse-n1 -DNTHREADS=$(NTHREADS) -Icacti
   #OPT = -O0 -DNTHREADS=$(NTHREADS)
 endif
 

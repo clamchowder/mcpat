@@ -216,6 +216,7 @@ class EXECU :public Component {
     FunctionalUnit * fp_u;
     FunctionalUnit * exeu;
     FunctionalUnit * mul;
+    FunctionalUnit * avx512;
 	interconnect * int_bypass;
 	interconnect * intTagBypass;
 	interconnect * int_mul_bypass;

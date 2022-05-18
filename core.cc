@@ -1094,6 +1094,7 @@ EXECU::EXECU(ParseXML* XML_interface, int ithCore_, InputParameter* interface_ip
  fp_u(0),
  exeu(0),
  mul(0),
+ avx512(0),
  int_bypass(0),
  intTagBypass(0),
  int_mul_bypass(0),
@@ -1122,6 +1123,12 @@ EXECU::EXECU(ParseXML* XML_interface, int ithCore_, InputParameter* interface_ip
 		  mul   = new FunctionalUnit(XML, ithCore,&interface_ip, coredynp, MUL);
 		  area.set_area(area.get_area()+ mul->area.get_area());
 		  fu_height +=  mul->FU_height;
+	  }
+	  if (coredynp.num_avx512 > 0)
+	  {
+	          avx512 = new FunctionalUnit(XML, ithCore,&interface_ip, coredynp, AVX512); 
+		  area.set_area(area.get_area()+ avx512->area.get_area());
+		  fu_height +=  avx512->FU_height;
 	  }
 	  /*
 	   * broadcast logic, including int-broadcast; int_tag-broadcast; fp-broadcast; fp_tag-broadcast
@@ -3610,6 +3617,10 @@ void EXECU::computeEnergy(bool is_tdp)
 	{
 		mul->computeEnergy(is_tdp);
 	}
+	if (coredynp.num_avx512 > 0) 
+	{
+	        avx512->computeEnergy(is_tdp);
+	}
 
 	if (is_tdp)
 	{
@@ -3627,6 +3638,12 @@ void EXECU::computeEnergy(bool is_tdp)
 			bypass.power = bypass.power + fp_bypass->power*pppm_t  + fpTagBypass->power*pppm_t ;
 			power      = power + fp_u->power;
 		}
+
+ 		if (coredynp.num_avx512>0)
+		{
+		        // don't model interconnect/bypass for now
+			power      = power + avx512->power;
+		} 
 
 		power      = power + rfu->power + exeu->power + bypass.power + scheu->power;
 	}
@@ -3650,6 +3667,12 @@ void EXECU::computeEnergy(bool is_tdp)
 			bypass.rt_power = bypass.rt_power + fpTagBypass->power*pppm_t;
 			rt_power      = rt_power + fp_u->rt_power;
 		}
+
+		if (coredynp.num_avx512 > 0) 
+		{
+		        rt_power = rt_power + avx512->power;
+		}
+
 		rt_power      = rt_power + rfu->rt_power + exeu->rt_power + bypass.rt_power + scheu->rt_power;
 	}
 }
@@ -3700,6 +3723,11 @@ void EXECU::displayEnergy(uint32_t indent,int plevel,bool is_tdp)
 		{
 			mul->displayEnergy(indent,is_tdp);
 		}
+		if (coredynp.num_avx512 > 0)
+		{
+		        avx512->displayEnergy(indent,is_tdp);
+		}
+
 		cout << indent_str << "Results Broadcast Bus:" << endl;
 		cout << indent_str_next << "Area Overhead = " << bypass.area.get_area()*1e-6  << " mm^2" << endl;
 		cout << indent_str_next << "Peak Dynamic = " << bypass.power.readOp.dynamic*clockRate  << " W" << endl;
@@ -4164,6 +4192,7 @@ void Core::set_core_param()
     coredynp.num_alus      = XML->sys.core[ithCore].ALU_per_core;
     coredynp.num_fpus      = XML->sys.core[ithCore].FPU_per_core;
     coredynp.num_muls      = XML->sys.core[ithCore].MUL_per_core;
+    coredynp.num_avx512    = XML->sys.core[ithCore].AVX512_per_core;
     coredynp.vdd	       = XML->sys.core[ithCore].vdd;
     coredynp.power_gating_vcc	       = XML->sys.core[ithCore].power_gating_vcc;
 

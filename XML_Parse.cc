@@ -215,6 +215,11 @@ void ParseXML::parse(char* filepath)
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"ALU_per_core")==0) {sys.core[i].ALU_per_core=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"FPU_per_core")==0) {sys.core[i].FPU_per_core=atof(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"MUL_per_core")==0) {sys.core[i].MUL_per_core=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
+							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"AVX512_per_core")==0) {
+							  sys.core[i].AVX512_per_core=atoi(xNode3.getChildNode("param",k).getAttribute("value"));
+							  cout << "AVX-512 units specified" << endl;
+							  continue;
+							}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"instruction_buffer_size")==0) {sys.core[i].instruction_buffer_size=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"decoded_stream_buffer_size")==0) {sys.core[i].decoded_stream_buffer_size=atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
 							if (strcmp(xNode3.getChildNode("param",k).getAttribute("name"),"instruction_window_scheme")==0) {sys.core[i].instruction_window_scheme  =atoi(xNode3.getChildNode("param",k).getAttribute("value"));continue;}
@@ -1482,6 +1487,7 @@ void ParseXML::initialize() //Initialize all
 		sys.core[i].ALU_per_core=1;
 		sys.core[i].FPU_per_core=1.0;
 		sys.core[i].MUL_per_core=1;
+		sys.core[i].AVX512_per_core=0;
 		sys.core[i].instruction_buffer_size=1;
 		sys.core[i].decoded_stream_buffer_size=1;
 		//strcpy(sys.core[i].instruction_window_scheme,"default");
